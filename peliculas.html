@@ -3,22 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
     <title>Gestor de Peliculas</title>
 </head>
 <body>
-    <input id="nuevaPelicula" placeholder="agregar nueva pelicula" type="text">
-    <button onclick="agregarPelicula()">Agregar Pelicula</button>
-    <br>
-    <input id="posicionPelicula" placeholder="Indique posicion de pelicula" type="text">
-    <input id="cantidadEliminar" placeholder="Indique cantidad a eliminar" type="text">
-    <button onclick="borrarPelicula()">Borrar Pelicula</button>
-    <br>
-    <button onclick="mostrarPeliculas()">Mostrar Peliculas</button>
-    <p id="listaPeliculas"></p>
-    <br>
-    <button onclick="mostrarPeliculasNumeradas()">Peliculas enumeradas</button>
-    <br>
-    <p id="listaPeliculasEnumeradas"></p>
+    <div class="titulo-container">
+    <h1>GESTOR DE PELICULAS</h1>
+    <span id="contadorPeliculas"></span>
+</div>
+
+    <div class="container">
+        <div class="input-container">
+            <input id="nuevaPelicula" placeholder="agregar nueva pelicula" type="text">
+            <button onclick="agregarPelicula()">Agregar Pelicula</button>
+        </div>
+
+        <div class="input-container">
+            <input id="posicionPelicula" placeholder="Indique posicion de pelicula" type="text">
+            <input id="cantidadEliminar" placeholder="Indique cantidad a eliminar" type="text">
+            <button onclick="borrarPelicula()">Borrar Pelicula</button>
+        </div>
+    </div>
+    
+    <div class="input-container">
+        <input id="posicionEditarPelicula" placeholder="Indique posición de película a editar" type="text">
+        <input id="nuevoNombrePelicula" placeholder="Nuevo nombre de película" type="text">
+        <button onclick="editarPelicula()">Editar Pelicula</button>
+    </div>
+
+    <div class="botones-mostrar">
+        <div class="grupo-mostrar">
+            <button onclick="mostrarPeliculas()">Mostrar Peliculas</button>
+            <p id="listaPeliculas"></p>
+        </div>
+
+        <div class="grupo-mostrar">
+            <button onclick="mostrarPeliculasNumeradas()">Peliculas enumeradas</button>
+            <p id="listaPeliculasEnumeradas"></p>
+        </div>
+
+        <div class="grupo-mostrar">
+            <button onclick="mostrarPeliculasOrdenadas()">Peliculas Ordenadas</button>
+            <p id="listaPeliculasOrdenadas"></p>
+        </div>
+    </div>
     <script src="./js/peliculas.js"></script>
 </body>
 </html>
