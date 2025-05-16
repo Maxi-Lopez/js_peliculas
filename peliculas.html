@@ -15,6 +15,8 @@
     <div class="container">
         <div class="input-container">
             <input id="nuevaPelicula" placeholder="agregar nueva pelicula" type="text">
+            <input type="text" id="nuevoGenero" placeholder="Género de la película">
+
             <button onclick="agregarPelicula()">Agregar Pelicula</button>
         </div>
 
@@ -38,15 +40,19 @@
         </div>
 
         <div class="grupo-mostrar">
-            <button onclick="mostrarPeliculasNumeradas()">Peliculas enumeradas</button>
+            <button onclick="mostrarPeliculasNumeradas()">Mostrar Peliculas enumeradas</button>
             <p id="listaPeliculasEnumeradas"></p>
         </div>
 
         <div class="grupo-mostrar">
-            <button onclick="mostrarPeliculasOrdenadas()">Peliculas Ordenadas</button>
+            <button onclick="mostrarPeliculasOrdenadas()">Ordenar Peliculas</button>
             <p id="listaPeliculasOrdenadas"></p>
         </div>
     </div>
     <script src="./js/peliculas.js"></script>
 </body>
+<footer class="footer">
+  <p>&copy; 2025 - Maximiliano Lopez</p>
+</footer>
+
 </html>

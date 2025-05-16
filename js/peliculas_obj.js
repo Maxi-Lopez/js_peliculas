@@ -1,71 +1,67 @@
 const peliculas = [
-  "El Padrino",
-  "Pulp Fiction",
-  "Forrest Gump",
-  "El Caballero de la Noche",
-  "La Lista de Schindler",
-  "Inception",
-  "Parásitos",
-  "Titanic",
-  "Gladiador",
-  "El Señor de los Anillos: La Comunidad del Anillo"
+  { titulo: "El Padrino", genero: "Drama" },
+  { titulo: "Pulp Fiction", genero: "Crimen" },
+  { titulo: "Forrest Gump", genero: "Drama" },
+  { titulo: "El Caballero de la Noche", genero: "Acción" },
+  { titulo: "La Lista de Schindler", genero: "Drama" },
+  { titulo: "Inception", genero: "Ciencia Ficción" },
+  { titulo: "Parásitos", genero: "Thriller" },
+  { titulo: "Titanic", genero: "Romántico" },
+  { titulo: "Gladiador", genero: "Acción" },
+  { titulo: "El Señor de los Anillos: La Comunidad del Anillo", genero: "Fantasía" }
 ];
-
 
 const mostrarPeliculas = () => {
     const listaPeliculas = document.getElementById("listaPeliculas");
     listaPeliculas.innerHTML = "";
     peliculas.forEach(pelicula => {
-    const li = document.createElement("li");
-    li.innerText = pelicula;
-    listaPeliculas.appendChild(li);
-        });
+        const li = document.createElement("li");
+        li.innerText = pelicula.titulo;
+        listaPeliculas.appendChild(li);
+    });
 };
 
 const mostrarPeliculasNumeradas = () => {
-    const listaPeliculasEnumeradas = document.getElementById("listaPeliculasEnumeradas");
-    const peliculasEnumeradas = peliculas.map((pelicula, index) => `${index + 1}) ${pelicula}`);
+    const peliculasEnumeradas = peliculas.map((pelicula, index) => `${index + 1}) ${pelicula.titulo}`);
     alert("Películas numeradas:\n" + peliculasEnumeradas.join("\n"));
     listaPeliculas.innerHTML = "";
 
 };
 
-
 const mostrarPeliculasOrdenadas = () => {
-    const listaPeliculasOrdenadas = document.getElementById("listaPeliculasOrdenadas");
-    peliculas.sort();
-    alert("Películas ordenadas:\n" + peliculas.join("\n"));
+    const peliculasOrdenadas = peliculas.slice().sort((a, b) => a.titulo.localeCompare(b.titulo));
+    alert("Películas ordenadas:\n" + peliculasOrdenadas.map(p => p.titulo).join("\n"));
     listaPeliculas.innerHTML = "";
 };
 
 
-
-
 const agregarPelicula = () => {
     const nuevaPelicula = document.getElementById("nuevaPelicula").value;
+    const nuevoGenero = document.getElementById("nuevoGenero").value;
     
     if (nuevaPelicula === "") {
         alert("No se puede agregar una película vacía.");
         return;
     }
 
-    if (peliculas.includes(nuevaPelicula)) {
+    for (let i = 0; i < peliculas.length; i++) {
+    if (peliculas[i].titulo === nuevaPelicula) {
         alert("La película ya existe.");
         return;
+        }
     }
-
-    peliculas.push(nuevaPelicula);
+    
+    peliculas.push({ titulo: nuevaPelicula, genero: nuevoGenero || "Desconocido" });
     alert(`Nueva película agregada: ${nuevaPelicula}`);
     document.getElementById("nuevaPelicula").value = "";
     mostrarPeliculas();
     actualizarContadorPeliculas();
-
 };
 
 const borrarPelicula = () => {
     const posicionPelicula = document.getElementById("posicionPelicula").value;
     const cantidadEliminar = document.getElementById("cantidadEliminar").value;
-   
+    
     if (posicionPelicula === "" || cantidadEliminar === "") {
         alert("Debe ingresar la posicion en el array donde esta ubicada la pelìcula.");
         return;
@@ -81,7 +77,6 @@ const borrarPelicula = () => {
     actualizarContadorPeliculas();
 };
 
-
 const editarPelicula = () => {
     const posicion = document.getElementById("posicionEditarPelicula").value;
     const nuevoNombre = document.getElementById("nuevoNombrePelicula").value;
@@ -96,17 +91,14 @@ const editarPelicula = () => {
         return;
     }
 
-    peliculas[posicion] = nuevoNombre;
+    peliculas[posicion].titulo = nuevoNombre;
     alert(`Película en la posición ${posicion} editada a: ${nuevoNombre}`);
     mostrarPeliculas();
     actualizarContadorPeliculas();
 };
 
+
 const actualizarContadorPeliculas = () => {
     const contador = document.getElementById("contadorPeliculas");
-    contador.innerText = `Hay ${peliculas.length} películas en el listado`;
+    contador.innerText = `Hay ${peliculas.length} películas`;
 };
-
-
-actualizarContadorPeliculas();
-
