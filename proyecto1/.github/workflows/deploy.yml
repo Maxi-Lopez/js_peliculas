@@ -1,0 +1,22 @@
+name: Deploy por Git Pull
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configurar conexión SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.proyecto1 }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 123.45.67.89 >> ~/.ssh/known_hosts
+
+      - name: Ejecutar git pull en el servidor
+        run: |
+          ssh alumno@123.45.67.89 "cd ~/lemp-sites/m_lopez && git pull origin main"
+
