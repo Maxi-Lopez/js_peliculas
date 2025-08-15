@@ -1,0 +1,35 @@
+name: CI/CD DevOps VirtualHost
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  ci:
+    name: Ejecutar Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Instalar dependencias
+        run: npm install
+      - name: Ejecutar test.js
+        run: node test.js
+
+  cd:
+    name: Deploy al Servidor
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configurar SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H alumno@137.184.127.11 >> ~/.ssh/known_hosts
+      - name: Actualizar repo en servidor
+        run: |
+          ssh alumno@137.184.127.11 "cd ~/lemp-sites/m_lopez && git pull origin main"
